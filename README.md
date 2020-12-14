@@ -28,3 +28,7 @@ Build cool projects with [Electron](https://fireship.io/tags/electron).
 - [x] Search Filter component/ Paginator
 - [x] Figure out Persistent storage, stray code in store/index.ts, SaveSearchesButton
 - [x] clean up unused storage dependencies - installed: electron-store, electron-json-storage
+- [x] refactor actions as custom stores
+  ```
+
+  ```

@@ -1,9 +1,9 @@
 <script lang="ts">
   import { DownloadIcon } from "svelte-feather-icons";
   import { searchResults } from "../../store";
-  import * as torrentActions from "../../store/actions/torrents";
+  import { torrents } from "../../store/customStores/torrents";
   import Pill from "../atoms/Pill.svelte";
-  $: torrents = $searchResults?.torrents || [];
+  $: _torrents = $searchResults?.torrents || [];
 
   const formatFileSize = (sizeInBytes: number) => {
     const units = ["B", "KB", "MB", "GB", "TB"];
@@ -48,7 +48,7 @@
 </style>
 
 <ul>
-  {#each torrents as torrent}
+  {#each _torrents as torrent}
     <li>
       <div class="title">{torrent.name}</div>
       <div class="meta">
@@ -66,7 +66,7 @@
       <div
         class="icon"
         on:click={() => {
-          torrentActions.add(torrent);
+          torrents.add(torrent);
         }}>
         <DownloadIcon size="24" />
       </div>

@@ -2,7 +2,7 @@
   import { fly } from "svelte/transition";
   import { StarIcon } from "svelte-feather-icons";
   import { parsedQueryString } from "../../store";
-  import * as savedSearches from "../../store/actions/savedSearches";
+  import { savedSearches } from "../../store/customStores/savedSearches";
 
   $: isSaved = savedSearches.exists($parsedQueryString);
 

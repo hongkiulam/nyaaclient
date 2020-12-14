@@ -1,9 +1,8 @@
 <script lang="ts">
   import Sidebar from "../atoms/Sidebar.svelte";
   import { StarIcon } from "svelte-feather-icons";
-  import { savedSearches } from "../../store";
-  import * as savedSearchesActions from "../../store/actions/savedSearches";
   import { objToQueryString } from "../../helpers/query";
+  import { savedSearches } from "../../store/customStores/savedSearches";
   export let open: boolean = false;
 </script>
 
@@ -11,7 +10,7 @@
   {#each $savedSearches as sS}
     <a href="#/?{objToQueryString(sS)}">{sS.q}</a><button
       on:click={() => {
-        savedSearchesActions.remove(sS);
+        savedSearches.remove(sS);
       }}>X</button>
   {/each}
 </Sidebar>

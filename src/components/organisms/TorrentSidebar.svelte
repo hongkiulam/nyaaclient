@@ -1,8 +1,7 @@
 <script lang="ts">
   import Sidebar from "../atoms/Sidebar.svelte";
   import { DownloadIcon } from "svelte-feather-icons";
-  import { torrents } from "../../store";
-  import * as torrentActions from "../../store/actions/torrents";
+  import { torrents } from "../../store/customStores/torrents";
 
   export let open: boolean = false;
 </script>
@@ -11,7 +10,7 @@
   {#each $torrents as torrent}
     <a href="#/torrents/{torrent.id}">{torrent.name}</a><button
       on:click={() => {
-        torrentActions.remove(torrent);
+        torrents.remove(torrent);
       }}>X</button>
   {/each}
 </Sidebar>
