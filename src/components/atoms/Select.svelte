@@ -30,6 +30,7 @@
     --indicatorTop: 50%;
     --indicatorHeight: var(--height);
     --clearSelectTop: 50%;
+    --clearSelectRight: 35px;
   }
   :global(.select_class) {
     width: 100%;

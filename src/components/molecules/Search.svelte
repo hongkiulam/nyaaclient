@@ -58,7 +58,7 @@
 </style>
 
 <form class="search_bar" on:submit|preventDefault={search}>
-  <Input {large} bind:value placeholder="Search . . ." />
+  <Input {large} bind:value placeholder="Search Anime . . ." />
   {#if !large}
     <div class="save_search_button_position">
       <SaveSearchButton />
