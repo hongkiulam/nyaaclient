@@ -2,9 +2,13 @@
   import { fly } from "svelte/transition";
   import { StarIcon } from "svelte-feather-icons";
   import { parsedQueryString } from "../../store";
-  import { savedSearches } from "../../store/customStores/savedSearches";
+  import { savedSearches } from "../../store/customStore/savedSearches";
 
-  $: isSaved = savedSearches.exists($parsedQueryString);
+  let isSaved = false;
+  $: {
+    isSaved = savedSearches.exists($parsedQueryString);
+    $savedSearches; // savedSearches as dependency
+  }
 
   const toggleSaveSearch = () => {
     if (isSaved) {
