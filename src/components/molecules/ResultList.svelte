@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { DownloadIcon } from "svelte-feather-icons";
-  import { searchResults } from "../../store";
+  import { fade } from "svelte/transition";
+  import { DownloadIcon, CheckIcon } from "svelte-feather-icons";
+  import { searchResults, sidebar } from "../../store";
   import { torrents } from "../../store/customStores/torrents";
+  import type { NyaaTorrent } from "../../types/torrent";
   import Pill from "../atoms/Pill.svelte";
-  $: _torrents = $searchResults?.torrents || [];
+  $: _torrents = ($searchResults?.torrents || []) as NyaaTorrent[];
 
   const formatFileSize = (sizeInBytes: number) => {
     const units = ["B", "KB", "MB", "GB", "TB"];
@@ -17,6 +19,11 @@
   };
   const formatDate = (isoDate: string) => {
     return isoDate.slice(0, 10);
+  };
+
+  $: torrentAlreadyAdded = (torrent: NyaaTorrent) => {
+    return torrents.exists(torrent.magnet);
+    $torrents; //dependency
   };
 </script>
 
@@ -32,7 +39,7 @@
     border-bottom: 1px solid var(--main-3);
     padding: calc(var(--paddingS) / 3);
     &:hover {
-      border-bottom-color: var(--main-4);
+      border-bottom-color: white;
     }
     .title {
       flex: 1;
@@ -43,6 +50,10 @@
     .icon {
       display: contents;
       cursor: pointer;
+      &.check {
+        color: var(--success);
+        cursor: auto;
+      }
     }
   }
 </style>
@@ -65,10 +76,22 @@
       </div>
       <div
         class="icon"
-        on:click={() => {
-          torrents.add(torrent);
+        class:check={torrentAlreadyAdded(torrent)}
+        on:click|stopPropagation={() => {
+          if (!torrents.exists(torrent.magnet)) {
+            $sidebar.right = true;
+            torrents.add(torrent);
+          }
         }}>
-        <DownloadIcon size="24" />
+        {#if torrentAlreadyAdded(torrent)}
+          <div in:fade>
+            <CheckIcon size="24" />
+          </div>
+        {:else}
+          <div>
+            <DownloadIcon size="24" />
+          </div>
+        {/if}
       </div>
     </li>
   {:else}Loading{/each}

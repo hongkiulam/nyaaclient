@@ -13,6 +13,10 @@ if (!electronStore.get("savedSearches")) {
   electronStore.set("savedSearches", []);
   electronStore.set("torrents", []);
 }
+// WebTorrent
+import type WebTorrent from "webtorrent";
+const WT = require("webtorrent");
+export const wtClient = new WT() as WebTorrent.Instance;
 
 export const searchResults = writable<SearchResponse>(null);
 export const parsedQueryString = readable<QueryObject>(undefined, (set) => {

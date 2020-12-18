@@ -29,6 +29,6 @@ Build cool projects with [Electron](https://fireship.io/tags/electron).
 - [x] Figure out Persistent storage, stray code in store/index.ts, SaveSearchesButton
 - [x] clean up unused storage dependencies - installed: electron-store, electron-json-storage
 - [x] refactor actions as custom stores
-  ```
-
-  ```
+- ~~do not persists torrents~~
+- [x] torrent store is to store torrent objects from wtClient after the metadata has been loaded
+- [x] actually delete torrent when removing

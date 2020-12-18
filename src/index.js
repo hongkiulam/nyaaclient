@@ -1,6 +1,7 @@
 // * Instantiating Electron
 // * reference [https://github.com/codediodeio/electron-forge-svelte]
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+const rimraf = require("rimraf");
 const path = require("path");
 
 // Live Reload
@@ -75,3 +76,13 @@ process.on("exit", () => {
 // ipcMain.handle("set", (event, key, value) => {
 //   store.set(key, value);
 // });
+ipcMain.on("rimraf", (event, path) => {
+  if (path && path.includes("/tmp/webtorrent/")) {
+    rimraf(path, (err) => {
+      if (err) {
+        event.reply("rimraf-error", err);
+      }
+      event.reply("rimraf-done", "done");
+    });
+  }
+});

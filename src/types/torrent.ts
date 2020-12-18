@@ -1,9 +1,12 @@
-export interface Torrent {
+import type WebTorrent from "webtorrent";
+
+// from nyaa search results
+export interface NyaaTorrent {
   id: number;
   name: string;
   status: number;
   hash: string;
-  date: Date;
+  date: string;
   filesize: any;
   description: string;
   comments: any[];
@@ -27,4 +30,12 @@ export interface Torrent {
   completed: number;
   last_scrape: string;
   file_list: any[];
+}
+export interface TorrentInstance {
+  webTorrent?: WebTorrent.Torrent;
+  searchResult: NyaaTorrent;
+  loading: boolean;
+}
+export interface Torrent {
+  [id: number]: TorrentInstance;
 }
