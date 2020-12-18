@@ -5,11 +5,9 @@
   import TorrentSidebar from "../organisms/TorrentSidebar.svelte";
   import Search from "../molecules/Search.svelte";
   import Results from "../organisms/Results.svelte";
-  import { parsedQueryString, searchResults } from "../../store";
+  import { parsedQueryString, searchResults, sidebar } from "../../store";
   import { nyaa } from "../../helpers/nyaa";
 
-  let leftSidebarOpen = false;
-  let rightSidebarOpen = false;
   let suspended = false;
 
   $: suspended = $querystring === "";
@@ -49,10 +47,10 @@
 <div class="home_container">
   <Topbar
     on:starclick={() => {
-      leftSidebarOpen = true;
+      $sidebar.left = true;
     }}
     on:downloadclick={() => {
-      rightSidebarOpen = true;
+      $sidebar.right = true;
     }}>
     <div class="search_suspend_controller" class:suspended>
       <Search large={suspended} />
@@ -61,5 +59,5 @@
   <Results show={!suspended} />
 </div>
 <!-- Sidebars -->
-<SavedSearchesSidebar bind:open={leftSidebarOpen} />
-<TorrentSidebar bind:open={rightSidebarOpen} />
+<SavedSearchesSidebar bind:open={$sidebar.left} />
+<TorrentSidebar bind:open={$sidebar.right} />

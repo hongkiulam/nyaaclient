@@ -2,7 +2,7 @@
   import { fly } from "svelte/transition";
   import { StarIcon } from "svelte-feather-icons";
   import { parsedQueryString } from "../../store";
-  import { savedSearches } from "../../store/customStore/savedSearches";
+  import { savedSearches } from "../../store/customStores/savedSearches";
 
   let isSaved = false;
   $: {

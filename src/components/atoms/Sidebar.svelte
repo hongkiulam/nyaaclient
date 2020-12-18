@@ -4,6 +4,17 @@
   export let open: boolean = false;
   export let icon: any = XIcon;
   export let title: string = "";
+
+  let sidebarRef;
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!sidebarRef.contains(e.target) && e.target !== sidebarRef) {
+      open = false;
+      document.removeEventListener("click", handleClickOutside);
+    }
+  };
+  $: if (open && sidebarRef) {
+    document.addEventListener("click", handleClickOutside);
+  }
 </script>
 
 <style lang="scss">
@@ -46,7 +57,7 @@
   }
 </style>
 
-<div class="sidebar {side}" class:open>
+<div class="sidebar {side}" class:open bind:this={sidebarRef}>
   <header>
     <div class="icon">
       <svelte:component this={icon} size="24" />

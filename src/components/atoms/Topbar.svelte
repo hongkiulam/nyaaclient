@@ -25,13 +25,17 @@
 </style>
 
 <nav>
-  <div class="icon_button" on:click={() => dispatch('starclick')}>
+  <div
+    class="icon_button"
+    on:click|preventDefault|stopPropagation={() => dispatch('starclick')}>
     <StarIcon size="24" />
   </div>
   <div class="middle">
     <slot />
   </div>
-  <div class="icon_button" on:click={() => dispatch('downloadclick')}>
+  <div
+    class="icon_button"
+    on:click|preventDefault|stopPropagation={() => dispatch('downloadclick')}>
     <DownloadIcon size="24" />
   </div>
 </nav>
