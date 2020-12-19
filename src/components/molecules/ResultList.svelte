@@ -5,18 +5,9 @@
   import { torrents } from "../../store/customStores/torrents";
   import type { NyaaTorrent } from "../../types/torrent";
   import Pill from "../atoms/Pill.svelte";
+  import { formatFileSize } from "../../helpers/format";
   $: _torrents = ($searchResults?.torrents || []) as NyaaTorrent[];
 
-  const formatFileSize = (sizeInBytes: number) => {
-    const units = ["B", "KB", "MB", "GB", "TB"];
-    let counter = 0;
-    let formatted = sizeInBytes;
-    while (formatted > 1024) {
-      formatted = formatted / 1024;
-      counter++;
-    }
-    return formatted.toFixed(1) + units[counter];
-  };
   const formatDate = (isoDate: string) => {
     return isoDate.slice(0, 10);
   };
@@ -40,6 +31,7 @@
     padding: calc(var(--paddingS) / 3);
     &:hover {
       border-bottom-color: white;
+      background: var(--main-1);
     }
     .title {
       flex: 1;
