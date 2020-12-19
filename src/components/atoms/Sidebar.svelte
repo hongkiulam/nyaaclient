@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
+
   import { XIcon } from "svelte-feather-icons";
   export let side: "left" | "right";
   export let open: boolean = false;
@@ -15,6 +17,9 @@
   $: if (open && sidebarRef) {
     document.addEventListener("click", handleClickOutside);
   }
+  onDestroy(() => {
+    document.removeEventListener("click", handleClickOutside);
+  });
 </script>
 
 <style lang="scss">

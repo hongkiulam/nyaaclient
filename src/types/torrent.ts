@@ -35,6 +35,7 @@ export interface TorrentInstance {
   webTorrent?: WebTorrent.Torrent;
   searchResult: NyaaTorrent;
   loading: boolean;
+  added: number;
 }
 export interface Torrent {
   [id: number]: TorrentInstance;

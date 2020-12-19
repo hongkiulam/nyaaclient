@@ -8,7 +8,7 @@ const useTorrents = () => {
   const add = (torrent: NyaaTorrent) => {
     torrents.update((old) => ({
       ...old,
-      [torrent.id]: { searchResult: torrent, loading: true },
+      [torrent.id]: { searchResult: torrent, loading: true, added: Date.now() },
     }));
     wtClient.add(torrent.magnet, (webtorrent) => {
       torrents.update((old) => ({
