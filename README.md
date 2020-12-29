@@ -1,34 +1,9 @@
-# Electron Forge + Svelte Starter
+# Nyaaclient
 
-Get up and running with 💪 Svelte & ⚡ Electron.
+Electron Svelte application which uses the Nyaa Pantsu API to search and list torrents, then the WebTorrent API to download the torrents.
 
-## Usage
+#### Limitations
 
-```
-git clone https://github.com/codediodeio/electron-forge-svelte.git my-app
-cd my-app
+I intended to also have video playback but struggled to progress due to limitations in media compatibility.
 
-npm install
-npm start
-```
-
-![svelte electron](https://firebasestorage.googleapis.com/v0/b/fireship-app.appspot.com/o/assets%2Felectron-svelte-hello.png?alt=media&token=0d3ecb24-3024-4358-ac26-7676b3e60fa1)
-
-## Notes
-
-- src/index.js - Main electron process.
-- src/svelte.js - Svelte app entrypoint.
-
-Setup [Electron with Svelte](https://fireship.io/snippets/svelte-electron-setup) from scratch.
-Build cool projects with [Electron](https://fireship.io/tags/electron).
-
-## TODO
-
-- [x] populate search when navigating direct to search page e.g. /#/?q=anime
-- [x] Search Filter component/ Paginator
-- [x] Figure out Persistent storage, stray code in store/index.ts, SaveSearchesButton
-- [x] clean up unused storage dependencies - installed: electron-store, electron-json-storage
-- [x] refactor actions as custom stores
-- ~~do not persists torrents~~
-- [x] torrent store is to store torrent objects from wtClient after the metadata has been loaded
-- [x] actually delete torrent when removing
+`.mkv` files and `.mp4` videos encoded with h264 are common formats, both of which aren't supported. An alternative would be to launch an external player such as VLC, but I have yet to do this.
